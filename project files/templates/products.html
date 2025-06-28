@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Products{% endblock %}
+
+{% block content %}
+<h2 class="text-3xl font-bold mb-6 text-center text-green-800">🥒 Our Products</h2>
+
+<!-- Filter Buttons -->
+<div class="flex flex-wrap justify-center gap-4 mb-10">
+  <a href="{{ url_for('products') }}" class="btn {% if active == 'all' %}btn-yellow{% else %}btn-outline{% endif %}">All Pickles</a>
+  <a href="{{ url_for('products', type='veg') }}" class="btn {% if active == 'veg' %}btn-green{% else %}btn-outline{% endif %}">Vegetarian</a>
+  <a href="{{ url_for('products', type='nonveg') }}" class="btn {% if active == 'nonveg' %}bg-purple-600 text-white{% else %}btn-outline{% endif %}">Non-Veg</a>
+  <a href="{{ url_for('products', type='snacks') }}" class="btn {% if active == 'snacks' %}bg-orange-500 text-white{% else %}btn-outline{% endif %}">Snacks</a>
+</div>
+
+<!-- Product Grid -->
+<div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+  {% if active == 'snacks' %}
+    {% for s in snacks %}
+    <div class="bg-white rounded-lg shadow-md p-4 text-center">
+      <img src="{{ url_for('static', filename='images/' ~ s.image) }}" class="w-full h-40 object-cover mb-2">
+      <h3 class="text-xl font-bold text-yellow-900">{{ s.name }}</h3>
+      <p class="text-gray-700">{{ s.desc }}</p>
+      <p class="text-yellow-800 font-semibold mt-2">₹{{ s.price }}</p>
+      <!-- ✅ Add to Cart -->
+      <a href="{{ url_for('add_to_cart', pid=s.id, type=active, page=current_page) }}"
+   class="btn bg-yellow-500 text-white px-4 py-2 rounded hover:bg-yellow-600">
+   Add to Cart
+</a>
+
+    </div>
+    {% endfor %}
+  {% else %}
+    {% for p in pickles %}
+    <div class="bg-white rounded-lg shadow-md p-4 text-center">
+      <img src="{{ url_for('static', filename='images/' ~ p.image) }}" class="w-full h-40 object-cover mb-2">
+      <h3 class="text-xl font-bold text-green-900">{{ p.name }}</h3>
+      <p class="text-gray-700">{{ p.desc }}</p>
+      <p class="text-green-800 font-semibold mt-2">₹{{ p.price }}</p>
+      <!-- ✅ Add to Cart -->
+      <a href="{{ url_for('add_to_cart', pid=p.id, type=active, page=current_page) }}"
+   class="btn bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+   Add to Cart
+</a>
+
+    </div>
+    {% endfor %}
+  {% endif %}
+</div>
+
+<!-- Pagination -->
+{% if active != 'snacks' and total_pages > 1 %}
+<div class="flex justify-center items-center gap-4 mt-10">
+  {% if current_page > 1 %}
+    <a href="{{ url_for('products', type=active, page=current_page-1) }}" class="btn btn-outline">← Previous</a>
+  {% endif %}
+
+  <span class="text-gray-600">Page {{ current_page }} of {{ total_pages }}</span>
+
+  {% if current_page < total_pages %}
+    <a href="{{ url_for('products', type=active, page=current_page+1) }}" class="btn btn-outline">Next →</a>
+  {% endif %}
+</div>
+{% endif %}
+{% endblock %}

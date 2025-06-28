@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Contact Us | Home Made Pickles</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff8ec;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #2f855a;
+      padding: 15px 20px;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+    nav a {
+      color: #fff;
+      margin-left: 15px;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 14px;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+    nav a:hover,
+    nav a.active {
+      background-color: #276749;
+      color: #fff;
+    }
+    .contact-container {
+      max-width: 800px;
+      margin: auto;
+      padding: 40px 20px;
+      background-color: #ffffff;
+      border-radius: 10px;
+      box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    }
+    .contact-header {
+      text-align: center;
+      font-size: 2.5rem;
+      font-weight: bold;
+      color: #2f855a;
+      margin-bottom: 30px;
+    }
+    form {
+      display: flex;
+      flex-direction: column;
+    }
+    label {
+      font-weight: bold;
+      margin-bottom: 5px;
+      color: #444;
+    }
+    input, textarea {
+      padding: 10px;
+      margin-bottom: 20px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+      font-size: 1rem;
+    }
+    button {
+      padding: 12px;
+      background-color: #2f855a;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 1rem;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #276749;
+    }
+    .contact-info {
+      margin-top: 40px;
+      text-align: center;
+      font-size: 1.05rem;
+      color: #333;
+      line-height: 1.8;
+    }
+    .contact-info strong {
+      color: #2f855a;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Home Made Pickles</h1>
+    <nav>
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('products') }}">Products</a>
+      <a href="{{ url_for('about') }}">About</a>
+      <a href="{{ url_for('contact_us') }}" class="active">Contact</a>
+      <a href="{{ url_for('view_cart') }}">Cart</a>
+    </nav>
+  </header>
+
+  <div class="contact-container">
+    <div class="contact-header">Get in Touch 📬</div>
+    <form method="POST" action="{{ url_for('contact_us') }}">
+      <label for="name">Name</label>
+      <input type="text" id="name" name="name" placeholder="Your name" required>
+
+      <label for="email">Email</label>
+      <input type="email" id="email" name="email" placeholder="Your email" required>
+
+      <label for="message">Message</label>
+      <textarea id="message" name="message" rows="5" placeholder="Write your message here..." required></textarea>
+
+      <button type="submit">Send Message</button>
+    </form>
+
+    <div class="contact-info">
+      <p><strong>Email:</strong> naiduakash709@gmail.com</p>
+      <p><strong>Phone:</strong> +91 98765 43210</p>
+      <p><strong>Working Hours:</strong> Monday - Saturday, 9:00 AM – 6:00 PM</p>
+    </div>
+  </div>
+</body>
+</html>

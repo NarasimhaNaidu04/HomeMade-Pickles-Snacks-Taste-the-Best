@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Us | Home Made Pickles</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #fff8ec;
+      margin: 0;
+      padding: 0;
+    }
+    header {
+      background-color: #2f855a;
+      padding: 15px 20px;
+      color: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    header h1 {
+      font-size: 1.5rem;
+      margin: 0;
+    }
+    nav a {
+      color: #fff;
+      margin-left: 15px;
+      text-decoration: none;
+      font-weight: bold;
+      padding: 8px 14px;
+      border-radius: 6px;
+      transition: background-color 0.3s ease;
+    }
+    nav a:hover,
+    nav a.active {
+      background-color: #276749;
+      color: #fff;
+    }
+    .about-container {
+      max-width: 1000px;
+      margin: auto;
+      padding: 40px 20px;
+      text-align: center;
+    }
+    .about-header {
+      font-size: 2.8rem;
+      font-weight: bold;
+      color: #2f855a;
+      margin-bottom: 20px;
+    }
+    .about-text {
+      font-size: 1.1rem;
+      color: #444;
+      line-height: 1.7;
+      margin-bottom: 30px;
+    }
+    .highlight {
+      color: #d97706;
+      font-weight: bold;
+    }
+    .cta {
+      margin-top: 40px;
+    }
+    .cta a {
+      text-decoration: none;
+      padding: 12px 25px;
+      background-color: #2f855a;
+      color: #fff;
+      font-weight: bold;
+      border-radius: 6px;
+      transition: background-color 0.3s;
+    }
+    .cta a:hover {
+      background-color: #276749;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Home Made Pickles</h1>
+    <nav>
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('products') }}">Products</a>
+      <a href="{{ url_for('about') }}" class="active">About</a>
+      <a href="{{ url_for('contact_us') }}">Contact</a>
+      <a href="{{ url_for('view_cart') }}">Cart</a>
+    </nav>
+  </header>
+
+  <div class="about-container">
+    <div class="about-header">About Home Made Pickles 🥒</div>
+    <div class="about-text">
+      Welcome to <span class="highlight">Home Made Pickles</span> — where tradition meets taste! <br /><br />
+      We are passionate about delivering hand-crafted pickles made with love, authentic ingredients, and timeless recipes. Whether you love the bold flavors of <span class="highlight">spicy mango</span>, the tang of <span class="highlight">lime and ginger</span>, or the richness of <span class="highlight">non-veg delicacies</span>, we have something for every palate.
+      <br /><br />
+      All our products are prepared with utmost hygiene and packed fresh to preserve the homely goodness you remember from your grandma's kitchen.
+    </div>
+
+    <div class="cta">
+      <a href="{{ url_for('products') }}">Browse Our Pickles</a>
+    </div>
+  </div>
+</body>
+</html>
