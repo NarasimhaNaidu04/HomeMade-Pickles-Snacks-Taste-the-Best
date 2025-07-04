@@ -1,1 +1,0 @@
-all executable html codes
