@@ -1,0 +1,76 @@
+<!-- templates/cart.html -->
+{% extends 'base.html' %}
+
+{% block title %}Your Cart{% endblock %}
+
+{% block content %}
+<div class="container max-w-4xl mx-auto py-8">
+
+  <header class="text-center mb-6">
+    <h1 class="text-3xl font-bold">🛒 Your Cart</h1>
+    <p class="text-gray-600">Review and manage your favorite pickles!</p>
+  </header>
+
+  {% with messages = get_flashed_messages() %}
+    {% if messages %}
+      <div class="mb-4">
+        {% for message in messages %}
+          <div class="bg-yellow-100 text-yellow-800 px-4 py-2 rounded mb-2">{{ message }}</div>
+        {% endfor %}
+      </div>
+    {% endif %}
+  {% endwith %}
+
+  {% if items %}
+    <div class="flex justify-between mb-4">
+      <a href="{{ url_for('clear_cart') }}" class="btn bg-red-500 hover:bg-red-600 text-white" onclick="return confirm('Clear all items?')">🗑️ Clear Cart</a>
+      <a href="{{ url_for('products') }}" class="btn bg-gray-200 hover:bg-gray-300">← Continue Shopping</a>
+    </div>
+
+    <div class="space-y-6">
+      {% for item in items %}
+      <div class="flex items-center justify-between bg-white shadow p-4 rounded-lg">
+        <div class="flex items-center">
+          <img src="{{ url_for('static', filename='images/' ~ item.image) }}" alt="{{ item.name }}" class="w-20 h-20 object-cover rounded mr-4">
+          <div>
+            <h3 class="font-bold text-lg">{{ item.name }}</h3>
+            <p class="text-sm text-gray-600">{{ item.desc }}</p>
+            <p class="text-green-700 font-semibold">₹{{ item.price }}</p>
+          </div>
+        </div>
+        <div class="text-center space-y-2">
+          <form method="POST" action="{{ url_for('update_quantity') }}" class="inline">
+            <input type="hidden" name="index" value="{{ loop.index0 }}">
+            <input type="hidden" name="action" value="increase">
+            <button class="qty-btn px-2 py-1 bg-green-200 rounded">+</button>
+          </form>
+          <form method="POST" action="{{ url_for('update_quantity') }}" class="inline">
+            <input type="hidden" name="index" value="{{ loop.index0 }}">
+            <input type="hidden" name="action" value="decrease">
+            <button class="qty-btn px-2 py-1 bg-yellow-200 rounded">−</button>
+          </form>
+          <br>
+          <a href="{{ url_for('remove_from_cart', index=loop.index0) }}" class="text-red-600 hover:underline text-sm" onclick="return confirm('Remove this item?')">Remove</a>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+
+    <div class="text-right mt-6">
+      <h2 class="text-xl font-bold">Total: ₹{{ total }}</h2>
+
+      <!-- Order form -->
+      <form action="{{ url_for('place_order') }}" method="POST" class="inline-block mt-3">
+        <button type="submit" class="btn bg-green-600 text-white hover:bg-green-700 px-6 py-2 rounded">🛒 Place Order</button>
+      </form>
+    </div>
+
+  {% else %}
+    <div class="text-center mt-12">
+      <h2 class="text-xl font-semibold text-gray-700">Your cart is empty 😢</h2>
+      <p class="text-gray-500 mb-4">Start shopping delicious pickles now!</p>
+      <a href="{{ url_for('products') }}" class="btn bg-green-600 text-white px-5 py-2 rounded hover:bg-green-700">🌶️ Browse Pickles</a>
+    </div>
+  {% endif %}
+</div>
+{% endblock %}

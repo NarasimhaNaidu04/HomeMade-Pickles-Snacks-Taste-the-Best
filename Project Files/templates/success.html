@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Order Placed{% endblock %}
+
+{% block content %}
+<div class="text-center mt-10">
+  <h2 class="text-3xl font-bold text-green-800 mb-4">🎉 Order Confirmed!</h2>
+  <p class="text-lg text-gray-700">Thank you for shopping with Home Made Pickles.</p>
+  <a href="{{ url_for('index') }}" class="inline-block mt-6 bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700">
+    Continue Shopping
+  </a>
+</div>
+{% endblock %}

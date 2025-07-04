@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Home Made Pickles{% endblock %}</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+
+<body class="bg-yellow-50 text-gray-800">
+
+  <!-- Navigation Bar -->
+  <nav class="bg-green-200 p-4 flex justify-between items-center shadow">
+    <div class="flex items-center space-x-2">
+      <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" width="120">
+      <span class="text-xl font-bold text-green-900">Home Made Pickles</span>
+    </div>
+
+    <div class="space-x-4 text-sm">
+      <a href="{{ url_for('index') }}">Home</a>
+      <a href="{{ url_for('products') }}">Products</a>
+      <a href="{{ url_for('about') }}">About</a>
+      <a href="{{ url_for('contact_us') }}">Contact</a>
+
+      {% if session.get('user') %}
+        {% if session['user'] == 'admin@pickles.com' %}
+          <a href="{{ url_for('admin') }}">Admin</a>
+        {% endif %}
+        <a href="{{ url_for('view_cart') }}">Cart</a>
+        <span>Hello, {{ session['user'] }}</span>
+        <a href="{{ url_for('logout') }}">Logout</a>
+      {% else %}
+        <a href="{{ url_for('signup') }}">Sign Up</a>
+        <a href="{{ url_for('login') }}">Login</a>
+      {% endif %}
+    </div>
+  </nav>
+
+  <!-- Page Content -->
+  <div class="container mx-auto p-6">
+    {% with messages = get_flashed_messages() %}
+      {% if messages %}
+        <div class="bg-yellow-100 text-yellow-900 p-4 mb-4 rounded">
+          {% for message in messages %}
+            <p>{{ message }}</p>
+          {% endfor %}
+        </div>
+      {% endif %}
+    {% endwith %}
+    {% block content %}{% endblock %}
+  </div>
+
+</body>
+</html>

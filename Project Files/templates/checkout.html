@@ -1,0 +1,30 @@
+<!-- templates/checkout.html -->
+{% extends 'base.html' %}
+
+{% block title %}Checkout{% endblock %}
+
+{% block content %}
+<div class="max-w-3xl mx-auto py-8">
+  <h2 class="text-3xl font-bold text-center text-green-800 mb-6">🧾 Order Summary</h2>
+
+  <ul class="space-y-4">
+    {% for item in items %}
+    <li class="border p-4 rounded bg-white flex justify-between">
+      <span>{{ item.name }} × {{ item.quantity }}</span>
+      <span>₹{{ item.price * item.quantity }}</span>
+    </li>
+    {% endfor %}
+  </ul>
+
+  <div class="text-center text-xl mt-6 text-green-700 font-semibold">
+    Total: ₹{{ total }}
+  </div>
+
+  <!-- Place Order Button -->
+  <form action="{{ url_for('place_order') }}" method="post" class="text-center mt-8">
+    <button type="submit" class="bg-green-600 text-white px-6 py-3 rounded hover:bg-green-700">
+      ✅ Confirm & Place Order
+    </button>
+  </form>
+</div>
+{% endblock %}

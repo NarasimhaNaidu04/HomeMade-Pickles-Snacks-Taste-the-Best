@@ -1,0 +1,39 @@
+<!-- templates/home.html -->
+{% extends 'base.html' %}
+
+{% block title %}Welcome to Home Made Pickles{% endblock %}
+
+{% block content %}
+<div class="text-center py-12 bg-gradient-to-br from-green-100 to-yellow-50 rounded-xl shadow-md">
+  <!-- Logo -->
+  <div class="flex justify-center mb-6">
+    <img src="{{ url_for('static', filename='images/logo.png') }}" alt="Logo" width="120">
+  </div>
+
+  <!-- Headline -->
+  <h1 class="text-5xl font-extrabold text-green-900 mb-4 drop-shadow-lg">Home Made Pickles</h1>
+  <p class="text-xl text-green-800 font-medium mb-6">Tradition in Every Jar 🍋🥒</p>
+
+  <!-- CTA Buttons -->
+  <div class="space-x-4">
+    <a href="{{ url_for('products') }}" class="btn btn-green">Browse Pickles</a>
+    <a href="{{ url_for('signup') }}" class="btn btn-yellow">Join Us</a>
+  </div>
+</div>
+
+<!-- Features Section -->
+<section class="mt-16 grid md:grid-cols-3 gap-8 text-center px-4">
+  <div class="card p-4 shadow rounded bg-white">
+    <h3 class="text-xl font-bold text-green-800 mb-2">100% Natural</h3>
+    <p>No preservatives. Just fresh ingredients and family love.</p>
+  </div>
+  <div class="card p-4 shadow rounded bg-white">
+    <h3 class="text-xl font-bold text-green-800 mb-2">Handcrafted</h3>
+    <p>Each batch is made by hand using traditional recipes.</p>
+  </div>
+  <div class="card p-4 shadow rounded bg-white">
+    <h3 class="text-xl font-bold text-green-800 mb-2">Fast Delivery</h3>
+    <p>Fresh pickles delivered to your doorstep across India.</p>
+  </div>
+</section>
+{% endblock %}
